@@ -10,13 +10,19 @@ function setup() {
 
 function draw() {
   background(50, 10);
-  let c = color(Math.random() * 256, Math.random() * 256, Math.random() * 256);
+  let c = "weiß";
+  if(click > 2){
+   c= color(Math.random() * 256, Math.random() * 256, Math.random() * 256);
+   }
   fill(c);
   ellipse(Math.random() * windowWidth, Math.random() * windowHeight, ellipseGross, ellipseGross);
 }
 
 function onMouseClick() {
-  if (click = 1){
-  ellipseGross = 40;
-}
+  if (click == 1){
+    ellipseGross = 35;
+    click = 2;
+  }else if (click ==2){
+click = 3;
+    }
 }
