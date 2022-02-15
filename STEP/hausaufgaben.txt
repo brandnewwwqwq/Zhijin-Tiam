@@ -1,0 +1,48 @@
+Aufgabe 1 "Glühbirne":
+    Aufgabe steht in ps_step_1.html
+    Stand aus dem Unterricht ist in ps_step_1b.js
+
+Aufgabe 2 "Konfetti":
+    Aufgabe steht in ps_step_2.html
+    Basis ist in ps_step_2.js
+
+Aufgabe 3 "Spielfeld erstellen":
+    Aufgabe steht in ps_step_3.html
+    Stand aus dem Unterricht ist in ps_step_3b_1.js
+    Update 1 Hausaufgabe:
+     1. Zwei geschachtelte for loops (eine for row/y und eine für col/x)
+     2. Flexibilität in der Anzahl (Variable)
+     3. Flexibler Größe und Abstand (Variablen)
+     4. Das endstehende Muster bitte mittig auf dem Bildschirm (windowWidth, windowHeight) (bearbeitet)
+   Stand für den Teil 2 in ps_step_3b_2.js
+     In einem Array (colors) speichern wir für jedes Feld/Rechteck individuell eine Farbe (ist im setup Code unten als “Geschenk” vorhanden).
+     1. Damit könnt ihr in der draw Function mit fill(…) diese Farbe setzten bevor das Rechteck gemalt wird.
+     2. Danach muss in der (einzubauenden) onMouseClick Function nur
+     3. ein colors Eintrag geändert werden (sowas wie colors[Zufallszahl][Zufallszahl] = color( … ))
+     => Dann ändert bei jedem Click ein Feld seine Farbe!
+
+Aufgabe 4 "Spielfeld mit 'smarten' Feldern":
+  Stand aus dem Unterricht ist in ps_step_4b.js
+  Hausaufgabe:
+    1. Auf Click ändert ein zufälliges Field die Farbe
+    2. auf Click ändert ein Field die Form
+    3. auf Click ändert ein zufälliges Field die Grösse  (optional)
+    4. oder was Euch sonst so interessiert (optional)
+
+Aufgabe 5 "Anfang des Spiels Snake":
+  Stand aus dem Unterricht ist in ps_step_5b.js
+  Hausaufgabe:
+    1. der bunte Punkt bewegt sich in alle Richtungen
+    2. der Magenta Punkt und ein grüner Punkt werden zufällig platziert
+    3. Es wird erkannt (über die Farbe und nicht über die Koordinaten!), wenn ich den grünen Punkt umgefärbt habe (Console.log(“Game Over”);)
+    4. für die Enthusiasten (optional): Es bewegen sich 2 Punkte in alle Richtungen
+
+Aufgabe 6 "Das Spiel Snake":
+  Stand aus dem Unterricht ist in ps_step_6b.js
+  Hausaufgabe:
+  1. die function placeFood mit Code füllen, der zufällig Food erzeugt - aber nicht dort, wo schon die Schlange ist. Am Besten die Food color als Parameter mitgeben, dann kann man damit jegliches Food erzeugen
+  2. auch wenn die Snake Food gefunden hat, soll neues Food erzeugt werden
+  3. bei grünen Food, wird die Schlange länger
+  4. bei gelbem Food wird sie kürzer - oder stirbt, wenn sie kein Feld mehr hat
+  5. die Snake stirbt auch, wenn sie sich selber beisst
+  6. optional: denkt Euch noch weitere Foods/Features aus
