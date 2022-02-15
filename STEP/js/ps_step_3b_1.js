@@ -1,12 +1,4 @@
 Homeworks.aufgabe = 3;
-
-/*
-let hugoNumber = 13.1; // Integer, Float, Double, ...
-let hugoString = "Text";
-let hugoBoolean = true;
-let hugoArray = ["Benno", "Marina", "Elijah", "Selina"];
-*/
-
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('thecanvas');
@@ -18,7 +10,10 @@ function setup() {
 }
 
 function draw() {
-  rect(200, 200, 40, 40);
+  for (let col =0; col < 10; col++){
+    for (let row=0; row < 10; row++)
+  rect(200+col*50, 200+row*50, 40, 40);
+}
 }
 
 //Hide the HTML Text with h and show it again with s
