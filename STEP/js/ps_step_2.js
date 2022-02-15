@@ -21,12 +21,17 @@ function draw() {
 
 function onMouseClick() {
   if (click == 1){
-    ellipseGross = 35;
+    ellipseGross = 50;
     click = 2;
-  }else if (click ==2){
+  }else if (click == 2){
 click = 3;
-}else if(click ==3){
+}else if(click == 3){
 speed = 90;
   click = 4;
-    }
+}else if(click == 4){
+  ellipseGross = 20;
+  speed = 20;
+  click = 1;
+}
+clear();
 }
