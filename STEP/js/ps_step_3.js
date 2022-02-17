@@ -16,11 +16,6 @@ let hochgesamt = numCol * size + (numCol - 1) * gap;
 let windowOben;
 let windowLinks;
 
-let patternWidth;
-let patternHeight;
-let borderX;
-let borderY;
-
 // umgefärbt feld
 let zufallsX;
 let zufallsY;
@@ -39,12 +34,6 @@ function setup() {
   // 这里赋值矩阵位置
   windowLinks = (windowWidth - bereitgesamt) / 2;
   windowOben = (windowHeight - hochgesamt) / 2;
-
-
-  let patternWidth = (size + gap) * numCol - gap;
-  let borderX = (windowWidth - patternWidth) / 2;
-  let patternHeight = (size + gap) * numRow - gap;
-  let borderY = (windowHeight - patternHeight) / 2;
 
 }
 
