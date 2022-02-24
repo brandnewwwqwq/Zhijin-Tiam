@@ -5,6 +5,7 @@ Homeworks.aufgabe = 5;
   3. Es wird erkannt (über die Farbe und nicht über die Koordinaten!), wenn ich den grünen Punkt umgefärbt habe (Console.log(“Game Over”);)
   4. für die Enthusiasten (optional): Es bewegen sich 2 Punkte in alle Richtungen
 */
+let fields = [];
 
 let hugoObject = {
   color: "red",
