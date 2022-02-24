@@ -1,11 +1,18 @@
 Homeworks.aufgabe = 5;
-
-let fields = [];
+/*Hausaufgabe:
+  1. der bunte Punkt bewegt sich in alle Richtungen
+  2. der Magenta Punkt und ein grüner Punkt werden zufällig platziert
+  3. Es wird erkannt (über die Farbe und nicht über die Koordinaten!), wenn ich den grünen Punkt umgefärbt habe (Console.log(“Game Over”);)
+  4. für die Enthusiasten (optional): Es bewegen sich 2 Punkte in alle Richtungen
+*/
 
 let hugoObject = {
-  color: 'red',
-  pos: { x: 90, y: 0 },
-  size: 20,
+  color: "red",
+  pos: {
+    x: 90,
+    y: 0
+  },
+  size: 300,
   getElementsByClassName: function(className) {
     console.log(className);
   }
@@ -18,7 +25,8 @@ function hugoFunc(text) {
 }
 
 hugoFunc('Benno');
-hugoFunc('Elijah');
+hugoFunc('zhijin');
+hugoFunc('newworld!');
 
 class Block {
 
