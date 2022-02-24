@@ -30,10 +30,10 @@ hugoFunc('zhijin');
 hugoFunc('newworld!');
 
 class Block {
-
   constructor(attrs) {
     this.attrs = attrs;
-    if (this.attrs.useRect) {
+    console.log(attrs.useRect);
+    if (attrs.useRect) {
       this.drawFunc = rect;
     } else {
       this.drawFunc = ellipse;
@@ -45,68 +45,62 @@ class Block {
     this.drawFunc(this.attrs.pos.x, this.attrs.pos.y, this.attrs.size, this.attrs.size);
   }
 
-  // sleep() {
-  //   console.log(this.attrs);
-  // }
-
-  changeColor(newColor) {
-    if (this.drawFunc == rect) {
-      this.attrs.color = newColor;
-    }
+  sleep() {
+    console.log("zzz");
   }
 
+  changeColor(newColor) {
+    this.attrs.color = newColor;
+  }
 }
 
-let size = 20;
-let gap = 8;
-let numCol = 15;
-let numRow = 15;
-
-let actCol = 10;
-let actRow = 0;
+let size = 30;
+let gap = 7;
+let numCol = 10;
+let numRow = 10;
+let actCol = 2;
+let actRow = 3;
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
-  canvas.parent('thecanvas');
+  canvas.parent("thecanvas");
 
   let patternWidth = (size + gap) * numCol - gap;
   let borderX = (windowWidth - patternWidth) / 2;
   let patternHeight = (size + gap) * numRow - gap;
   let borderY = (windowHeight - patternHeight) / 2;
 
-  for (let col = 0; col < numCol; col += 1) {
+  for (let col = 0; col < numCol; col++) {
     fields[col] = [];
     for (let row = 0; row < numRow; row++) {
-      fields[col][row] = new Block({ color: 'red', pos: { x: borderX + col * (size + gap), y: borderY + row * (size + gap) }, size: size, useRect: true, hallo: false });
+      //fields[row] = [];
+      let field = new Block({
+        color: "red", pos: { x: borderX + col * (size + gap), y: borderY + row * (size + gap)}, size: size, useRect: true});
+      fields[col][row] = field;
     }
   }
-  //drawx();
-  // let myBlock = fields[actCol][actRow];
-  // myBlock.drawFunc = ellipse;
-  // myBlock.attrs.color = 'blue';
-  // myBlock.changeColor('green');
-  // myBlock.attrs.size = 40;
-  // console.log(myBlock.attrs);
-  //myBlock.draw();
-  fields[actCol][actRow].changeColor('magenta');
-  fields[11][7].changeColor('green');
+  fields[actCol][actRow].attrs.color = "magenta";
+  fields[0][0].attrs.color = "green";
+  //fields[0][2].drawFunc = ellipse;
+  //fields[0][2].attrs.size = 15;
+  //console.log(fields[0][2]);
+  //fields[0][3].changeColor("blue");
 }
 
 function draw() {
-  clear();
+  // fields.forEach((field, idx) => {
+  //   field.draw();
+  // });
+
   for (let col = 0; col < numCol; col += 1) {
     for (let row = 0; row < numRow; row++) {
       fields[col][row].draw();
     }
   }
-  // fields.forEach((field, idx) => {
-  //   field.draw();
-  // });
 }
 
 //Hide the HTML Text with h and show it again with s
-function keyPressed(evt) {
-  evt.preventDefault();
+function keyPressed() {
   let divToHide = document.getElementsByClassName("overlay")[0];
   //divToHide.innerHTML = 'Hallo IG1!'
   switch (key) {
@@ -116,30 +110,74 @@ function keyPressed(evt) {
     case "s":
       divToHide.style.visibility = "visible";
       break;
+    case "ArrowDown":
+      console.log("Bewege den Punkt nach unten", actCol, actRow);
+      fields[actCol][actRow].changeColor("red");
+
+      if (actRow < numRow - 1) {
+        actRow++;
+      } else {
+        actRow = 0;
+      }
+      istEsGelb();
+
+      fields[actCol][actRow].changeColor("magenta");
+      break;
+
     case "ArrowUp":
-      fields[actCol][actRow].changeColor('red');
+      console.log("Bewege den Punkt nach oben", actCol, actRow);
+      fields[actCol][actRow].changeColor("red");
+
       if (actRow > 0) {
-        actRow = actRow - 1;
+        actRow--;
       } else {
         actRow = numRow - 1;
       }
-      //actRow = (actRow + 1) % numRow;
-      fields[actCol][actRow].changeColor('magenta');
-      console.log("UP");
+      istEsGelb();
+
+      fields[actCol][actRow].changeColor("magenta");
       break;
-    case "ArrowDown":
-      fields[actCol][actRow].changeColor('red');
-      // if (actRow < numRow -1) {
-      //   actRow = actRow + 1;
-      // } else {
-      //   actRow = 0;
-      // }
-      actRow = (actRow + 1) % numRow;
-      fields[actCol][actRow].changeColor('magenta');
-      console.log("DOWN");
+
+    case "ArrowRight":
+      console.log("Bewege den Punkt nach rechts", actCol, actRow);
+      fields[actCol][actRow].changeColor("red");
+
+      if (actCol < numCol - 1) {
+        actCol++;
+      } else {
+        actCol = 0;
+      }
+      istEsGelb();
+
+      fields[actCol][actRow].changeColor("magenta");
+      break;
+
+    case "ArrowLeft":
+      console.log("Bewege den Punkt nach links", actCol, actRow);
+      fields[actCol][actRow].changeColor("red");
+
+      if (actCol > 0) {
+        actCol--;
+      } else {
+        actCol = numCol - 1;
+      }
+      istEsGelb();
+
+      fields[actCol][actRow].changeColor("magenta");
+
       break;
     default:
-      console.log(key)
+      console.log(key);
       break;
+  }
+}
+
+function istEsGelb() {
+
+  if (fields[actCol][actRow].attrs.color == "green") {
+    console.log("green");
+    let greenCol = round(random(0, numCol));
+    let greenRow = round(random(0, numRow));
+    fields[greenCol][greenRow].attrs.color = "green";
   }
 }
