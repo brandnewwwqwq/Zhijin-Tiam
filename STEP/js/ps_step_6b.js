@@ -34,8 +34,6 @@ Homeworks.aufgabe = 6;
 
 */
 
-let fields = [];
-
 class Block {
 
   constructor(attrs) {
@@ -52,6 +50,10 @@ class Block {
     this.drawFunc(this.attrs.pos.x, this.attrs.pos.y, this.attrs.size, this.attrs.size);
   }
 
+  getColor() {
+    return this.attrs.color;
+  }
+
   changeColor(newColor) {
     if (this.drawFunc == rect) {
       this.attrs.color = newColor;
@@ -60,13 +62,17 @@ class Block {
 
 }
 
-let size = 20;
-let gap = 8;
+let size =30;
+let gap = 7;
 let numCol = 15;
 let numRow = 15;
+let fields = [];
 
-let actPos = {x: 10, y: 0};
-let move = {x: 0, y: 0};
+
+let actPos = { x: 10, y: 3 };
+let move = { x: 0, y: 0 };
+// head = 0 and tail = snake.length - 1
+let snake = [];
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -83,13 +89,20 @@ function setup() {
       fields[col][row] = new Block({ color: 'red', pos: { x: borderX + col * (size + gap), y: borderY + row * (size + gap) }, size: size, useRect: true, hallo: false });
     }
   }
-  fields[actPos.x][actPos.y].changeColor('magenta');
-  document.addEventListener('keydown', onKeyUp);
+  snake.unshift(fields[actPos.x][actPos.y]);
+  snake[0].changeColor('magenta');
+
+  addFood();
+  //Change frequency
   frameRate(5);
 }
 
 function draw() {
-  snakeMove();
+  if (move.x != 0 || move.y != 0) {
+    // (!=) not-equal-to operator
+    // (||) if and only if one or more of its operands is true
+    snakeMove();
+    }
   clear();
   for (let col = 0; col < numCol; col += 1) {
     for (let row = 0; row < numRow; row++) {
@@ -99,20 +112,65 @@ function draw() {
 }
 
 function snakeMove() {
-  fields[actPos.x][actPos.y].changeColor('red');
+  // When the snake eats a red, the snake's body plus one
+  snake[snake.length - 1].changeColor('red');
   actPos.x += move.x;
   actPos.y += move.y;
+  //x += y, x  = x + y
   if (actPos.x > numCol - 1) {
     actPos.x = 0;
   }
-  // 4x if
-  fields[actPos.x][actPos.y].changeColor('magenta');
+  if (actPos.x < 0) {
+    actPos.x = numCol - 1;
+  }
+  if (actPos.y > numRow - 1) {
+    actPos.y = 0;
+  }
+  if (actPos.y < 0) {
+    actPos.y = numRow - 1;
+  }
+
+  snake.unshift(fields[actPos.x][actPos.y]);
+  switch (snake[0].getColor()) {
+    case 'yellow':
+      if (snake[0].attrs.color == 'yellow'){
+        snake.pop().changeColor('red');
+        fields[round(random(0, numCol-1))][round(random(0, numRow-1))].changeColor('yellow');
+        snake.pop().changeColor('red');
+        if (snake.length < 1) {
+          alert('GAME OVER');
+        }
+      }
+      break;
+    case 'green':
+      // snake eats an apple and gets a new field
+      if (snake[0].attrs.color == 'green'){
+        fields[round(random(0, numCol-1))][round(random(0, numRow-1))].changeColor('green');
+      }
+      console.log("Apple!!!")
+      break;
+    case 'magenta':
+      // if snake eats itself, game over
+      if (snake[0].attrs.color == 'magenta') {
+        alert('GAME OVER');
+      }
+      console.log("Game Over!")
+      break;
+    default:
+      snake.pop().changeColor('red');
+      break;
+  }
+  snake[0].changeColor('magenta');
 }
 
-//Hide the HTML Text with h and show it again with s
-function onKeyUp(evt) {
+function addFood() {
+  // add yellow and green sections randomly
+  fields[round(random(0, numCol-1))][round(random(0, numRow-1))].changeColor('green');
+  fields[round(random(0, numRow-1))][round(random(0, numCol-1))].changeColor('yellow');
+}
+
+function keyPressed(evt) {
   let divToHide = document.getElementsByClassName("overlay")[0];
-  //divToHide.innerHTML = 'Hallo IG1!'
   switch (key) {
     case "h":
       divToHide.style.visibility = "hidden";
@@ -122,7 +180,7 @@ function onKeyUp(evt) {
       break;
     case "ArrowUp":
       evt.preventDefault();
-
+      move = { x: 0, y: -1 };
       // fields[actPos.x][actPos.y].changeColor('red');
       // actPos.y = actPos.y > 0 ? actPos.y - 1 : numRow - 1;
       // fields[actPos.x][actPos.y].changeColor('magenta');
@@ -130,7 +188,7 @@ function onKeyUp(evt) {
       break;
     case "ArrowDown":
       evt.preventDefault();
-
+      move = { x: 0, y: 1 };
       // fields[actPos.x][actPos.y].changeColor('red');
       // actPos.y = actPos.y < numRow - 1 ? actPos.y + 1 : 0;
       // fields[actPos.x][actPos.y].changeColor('magenta');
@@ -138,7 +196,7 @@ function onKeyUp(evt) {
       break;
     case "ArrowLeft":
       evt.preventDefault();
-
+      move = { x: -1, y: 0 };
       // fields[actPos.x][actPos.y].changeColor('red');
       // actPos.x = actPos.x > 0 ? actPos.x - 1 : numCol - 1;
       // fields[actPos.x][actPos.y].changeColor('magenta');
@@ -146,7 +204,7 @@ function onKeyUp(evt) {
       break;
     case "ArrowRight":
       evt.preventDefault();
-
+      move = { x: 1, y: 0 };
       // fields[actPos.x][actPos.y].changeColor('red');
       // actPos.x = actPos.x < numCol - 1 ? actPos.x + 1 : 0;
       // fields[actPos.x][actPos.y].changeColor('magenta');
