@@ -1,4 +1,38 @@
 Homeworks.aufgabe = 6;
+/* Hausaufgabe:
+  1. die function placeFood mit Code füllen, der zufällig Food erzeugt - aber nicht dort, wo schon die Schlange ist. Am Besten die Food color als Parameter mitgeben, dann kann man damit jegliches Food erzeugen
+  2. auch wenn die Snake Food gefunden hat, soll neues Food erzeugt werden
+  3. bei grünen Food, wird die Schlange länger
+  4. bei gelbem Food wird sie kürzer - oder stirbt, wenn sie kein Feld mehr hat
+  5. die Snake stirbt auch, wenn sie sich selber beisst
+  6. optional: denkt Euch noch weitere Foods/Features aus
+
+
+  Das Spiel besteht aus vier Teilen: dem Kopf der Schlange, dem Körper der Schlange, dem Futter und den Hindernissen.
+  Der Kopf der Schlange.
+  1. grün
+  2 Bereich der Bewegung (x<15, y<15)
+  3. position: zufällig
+
+  Körper der Schlange.
+  1. grün
+  2 Bereich der Bewegung (x<15, y<15)
+  3. position: zufällig
+  4. Wenn die Schlange Nahrung zu sich nimmt, fügt sie ihrem Körper eine hinzu.
+  Schlangenkörper minus eins, wenn er ein Hindernis frisst.
+  Game over, wenn sich die Schlange selbst frisst.
+
+  Essen.
+  1. magenta
+  2. position: Zufällig (x<15, y<15)
+  3. wenn das Futter auf die Schlange trifft und gegessen wird, wird ein Futter dem Körper der Schlange hinzugefügt und das nächste Futter erscheint zufällig
+
+  Hindernisse.
+  1. gelb
+  2.position: zufällig (x<15, y<15)
+  3. wenn ein Hindernis auf eine Schlange trifft, wird der Körper der Schlange um einen Punkt reduziert
+
+*/
 
 let fields = [];
 
