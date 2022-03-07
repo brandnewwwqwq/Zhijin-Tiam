@@ -1,6 +1,4 @@
 Homeworks.aufgabe = 4;
-
-Homeworks.aufgabe = 4;
 /*1. Auf Click ändert ein zufälliges Field die Farbe
 2. auf Click ändert ein Field die Form
 3. auf Click ändert ein zufälliges Field die Grösse  (optional)
