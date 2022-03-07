@@ -34,6 +34,8 @@ Homeworks.aufgabe = 6;
 
 */
 
+let fields = [];
+
 class Block {
 
   constructor(attrs) {
@@ -66,10 +68,9 @@ let size =30;
 let gap = 7;
 let numCol = 15;
 let numRow = 15;
-let fields = [];
 
 
-let actPos = { x: 10, y: 3 };
+let actPos = { x: 0, y: 0 };
 let move = { x: 0, y: 0 };
 // head = 0 and tail = snake.length - 1
 let snake = [];
@@ -89,12 +90,13 @@ function setup() {
       fields[col][row] = new Block({ color: 'red', pos: { x: borderX + col * (size + gap), y: borderY + row * (size + gap) }, size: size, useRect: true, hallo: false });
     }
   }
+
   snake.unshift(fields[actPos.x][actPos.y]);
   snake[0].changeColor('magenta');
 
   addFood();
-  //Change frequency
   frameRate(5);
+  //Change frequency
 }
 
 function draw() {
@@ -129,7 +131,7 @@ function snakeMove() {
   if (actPos.y < 0) {
     actPos.y = numRow - 1;
   }
-
+//Körper+1
   snake.unshift(fields[actPos.x][actPos.y]);
   switch (snake[0].getColor()) {
     case 'yellow':
@@ -167,6 +169,10 @@ function addFood() {
   // add yellow and green sections randomly
   fields[round(random(0, numCol-1))][round(random(0, numRow-1))].changeColor('green');
   fields[round(random(0, numRow-1))][round(random(0, numCol-1))].changeColor('yellow');
+  /*order
+  let x =fields[round(random(0, numCol-1))][round(random(0, numRow-1))].changeColor('green');
+  fields[round(random(0, numRow-1))][round(random(0, numCol-1))].changeColor('yellow');
+  */
 }
 
 function keyPressed(evt) {
@@ -181,33 +187,21 @@ function keyPressed(evt) {
     case "ArrowUp":
       evt.preventDefault();
       move = { x: 0, y: -1 };
-      // fields[actPos.x][actPos.y].changeColor('red');
-      // actPos.y = actPos.y > 0 ? actPos.y - 1 : numRow - 1;
-      // fields[actPos.x][actPos.y].changeColor('magenta');
       console.log("UP");
       break;
     case "ArrowDown":
       evt.preventDefault();
       move = { x: 0, y: 1 };
-      // fields[actPos.x][actPos.y].changeColor('red');
-      // actPos.y = actPos.y < numRow - 1 ? actPos.y + 1 : 0;
-      // fields[actPos.x][actPos.y].changeColor('magenta');
       console.log("DOWN");
       break;
     case "ArrowLeft":
       evt.preventDefault();
       move = { x: -1, y: 0 };
-      // fields[actPos.x][actPos.y].changeColor('red');
-      // actPos.x = actPos.x > 0 ? actPos.x - 1 : numCol - 1;
-      // fields[actPos.x][actPos.y].changeColor('magenta');
       console.log("LEFT");
       break;
     case "ArrowRight":
       evt.preventDefault();
       move = { x: 1, y: 0 };
-      // fields[actPos.x][actPos.y].changeColor('red');
-      // actPos.x = actPos.x < numCol - 1 ? actPos.x + 1 : 0;
-      // fields[actPos.x][actPos.y].changeColor('magenta');
       console.log("RIGHT");
       break;
     default:
